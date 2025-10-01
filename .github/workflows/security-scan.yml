@@ -1,0 +1,38 @@
+name: 'trivy-demo'
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  scan-dependencies:
+    name: '1. Quét Lỗ hổng Thư viện'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v3
+      - name: 'Run Trivy scanner on filesystem'
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          ignore-unfixed: true
+          format: 'table'
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'
+
+  scan-secrets:
+    name: '2. Quét Bí mật (Secrets)'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v3
+      - name: 'Run Trivy secret scanner'
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          scanners: 'secret'
+          format: 'table'
+          severity: 'CRITICAL'
+          exit-code: '1'
