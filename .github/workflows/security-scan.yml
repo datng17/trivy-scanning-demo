@@ -22,7 +22,7 @@ jobs:
           exit-code: '1'
 
   scan-secrets:
-    name: '2. Quét Bí mật (Secrets)'
+    name: '2. Quét API Key'
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout code'
