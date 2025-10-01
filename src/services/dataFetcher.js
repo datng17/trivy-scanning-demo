@@ -1,7 +1,8 @@
 const axios = require('axios');
 
 // Trong phiên bản an toàn, API key sẽ được lấy từ biến môi trường
-const GITHUB_API_KEY = process.env.GITHUB_API_KEY;
+const GITHUB_API_KEY = 'ghp_ThisIsAFakeKeyForADemoDoNotUse12345';
+
 
 const fetchRepoData = async (repoName) => {
   try {
